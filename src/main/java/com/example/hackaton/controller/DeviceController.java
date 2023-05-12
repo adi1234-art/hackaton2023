@@ -5,12 +5,13 @@ import com.example.hackaton.model.Client;
 import com.example.hackaton.model.Device;
 import com.example.hackaton.repository.ClientRepository;
 import com.example.hackaton.repository.DeviceRepository;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/devices")
+@RequestMapping(name = "/devices",produces = MediaType.APPLICATION_JSON_VALUE)
 public class DeviceController {
 
     private final ClientRepository users;

@@ -4,6 +4,7 @@ package com.example.hackaton.controller;
 
 import com.example.hackaton.model.Client;
 import com.example.hackaton.repository.ClientRepository;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import java.util.List;
  * Business case behind it's creation was to make frontend mock able to download
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping(name = "/users",produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientController {
 
     private final ClientRepository users;
