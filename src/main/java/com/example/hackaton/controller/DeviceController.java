@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * This class is used for sharing devices
+ */
 @RestController
 @RequestMapping(value = "/devices",produces = MediaType.APPLICATION_JSON_VALUE)
 public class DeviceController {

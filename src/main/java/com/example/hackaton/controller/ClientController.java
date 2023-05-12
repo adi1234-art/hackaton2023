@@ -3,12 +3,11 @@ package com.example.hackaton.controller;
 
 
 import com.example.hackaton.model.Client;
+import com.example.hackaton.model.dto.StringResponse;
 import com.example.hackaton.repository.ClientRepository;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -48,10 +47,10 @@ public class ClientController {
      * @return question for the user
      */
     @GetMapping("/{username}/question")
-    public String getQuestion(@PathVariable String username) {
-       return users.findByLoginName(username)
+    public StringResponse getQuestion(@PathVariable String username) {
+        return new StringResponse(users.findByLoginName(username)
                 .map(Client::getQuestion)
-                .orElse("No question");
+                .orElse("No question"));
     }
 
 }
