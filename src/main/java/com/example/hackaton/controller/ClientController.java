@@ -3,7 +3,8 @@ package com.example.hackaton.controller;
 
 
 import com.example.hackaton.model.Client;
-import com.example.hackaton.model.dto.StringResponse;
+import com.example.hackaton.model.Image;
+import com.example.hackaton.model.dto.JsonResponse;
 import com.example.hackaton.repository.ClientRepository;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +48,17 @@ public class ClientController {
      * @return question for the user
      */
     @GetMapping("/{username}/question")
-    public StringResponse getQuestion(@PathVariable String username) {
-        return new StringResponse(users.findByLoginName(username)
+    public JsonResponse<String> getQuestion(@PathVariable String username) {
+        return new JsonResponse<>(users.findByLoginName(username)
                 .map(Client::getQuestion)
+                .orElse("No question"));
+    }
+
+    @GetMapping("/{username}/image")
+    public JsonResponse<String> getImage(@PathVariable String username) {
+        return new JsonResponse<>(users.findByLoginName(username)
+                .map(Client::getImage)
+                .map(Image::getImageData)
                 .orElse("No question"));
     }
 

@@ -3,6 +3,8 @@ package com.example.hackaton.controller;
 
 import com.example.hackaton.model.Client;
 import com.example.hackaton.model.Device;
+import com.example.hackaton.model.dto.AddDeviceDTO;
+import com.example.hackaton.model.dto.JsonResponse;
 import com.example.hackaton.repository.ClientRepository;
 import com.example.hackaton.repository.DeviceRepository;
 import org.springframework.http.MediaType;
@@ -28,19 +30,23 @@ public class DeviceController {
 
 
     @GetMapping("/{id}/{username}")
-    public Boolean checkIfUserHasThisDevice(@PathVariable("id") String id, @PathVariable("username") String username) {
-        return  users.findByLoginName(username)
+    public JsonResponse<Boolean> checkIfUserHasThisDevice(@PathVariable("id") String id, @PathVariable("username") String username) {
+        return  new JsonResponse<>(users.findByLoginName(username)
                     .map(e-> e.getDevices().stream().noneMatch(f->f.getId().equals(id)))
-                    .orElse(false);
+                    .orElse(false));
     }
 
 
     @PostMapping("/{username}")
-    public void addDevice(@RequestBody Device device, @PathVariable String username) {
+    public void addDevice(@RequestBody AddDeviceDTO addDeviceDTO, @PathVariable("username") String username) {
+
         Optional<Client> client = users.findByLoginName(username);
         client.ifPresent(e->{
-            device.setClient(e);
-            devices.save(device);
+            if(!e.getAnswer().equals(addDeviceDTO.getAnswer())) {
+                throw new IllegalArgumentException("wrong answer");
+            }
+            addDeviceDTO.getDevice().setClient(e);
+            devices.save(addDeviceDTO.getDevice());
         });
 
     }
