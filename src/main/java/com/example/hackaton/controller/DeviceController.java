@@ -32,7 +32,7 @@ public class DeviceController {
     @GetMapping("/{id}/{username}")
     public JsonResponse<Boolean> checkIfUserHasThisDevice(@PathVariable("id") String id, @PathVariable("username") String username) {
         return  new JsonResponse<>(users.findByLoginName(username)
-                    .map(e-> e.getDevices().stream().noneMatch(f->f.getId().equals(id)))
+                    .map(e-> e.getDevices().stream().anyMatch(f->f.getId().equals(id)))
                     .orElse(false));
     }
 

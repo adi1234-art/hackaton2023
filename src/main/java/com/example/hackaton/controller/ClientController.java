@@ -54,6 +54,11 @@ public class ClientController {
                 .orElse("No question"));
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     @GetMapping("/{username}/image")
     public JsonResponse<String> getImage(@PathVariable String username) {
         return new JsonResponse<>(users.findByLoginName(username)
