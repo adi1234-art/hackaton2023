@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(name = "/devices",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/devices",produces = MediaType.APPLICATION_JSON_VALUE)
 public class DeviceController {
 
     private final ClientRepository users;

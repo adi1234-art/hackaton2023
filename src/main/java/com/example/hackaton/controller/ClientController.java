@@ -18,7 +18,7 @@ import java.util.List;
  * Business case behind it's creation was to make frontend mock able to download
  */
 @RestController
-@RequestMapping(name = "/users",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/users",produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientController {
 
     private final ClientRepository users;
